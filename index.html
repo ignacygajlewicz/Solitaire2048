@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Play Solitaire 2048 for Free — Online Card Puzzle Game</title>
+
+<meta name="description" content="Play Solitaire 2048 free online — no download needed! Merge cards in this addictive 2048 solitaire puzzle to train your brain.">
+<meta name="keywords" content="solitaire 2048, 2048 card game, merge solitaire online, unblocked puzzle games, 2048 free online, free online game, no download, merge cards, card puzzle, brain training game, casual web game, html5 puzzle, 2048 merge, solitaire puzzle">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Solitaire2048">
+<meta name="theme-color" content="#f4f6f9">
+<link rel="canonical" href="https://solitaire2048.com/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="Play Solitaire 2048 for Free — Online Card Puzzle Game">
+<meta property="og:description" content="Play Solitaire 2048 free online — no download needed! Merge cards in this addictive 2048 solitaire puzzle to train your brain.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://solitaire2048.com/">
+<meta property="og:image" content="https://solitaire2048.com/assets/og-preview.jpg">
+<meta property="og:site_name" content="Solitaire2048">
+
+<!-- X / Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Play Solitaire 2048 for Free — Online Card Puzzle Game">
+<meta name="twitter:description" content="Play Solitaire 2048 free online — no download needed! Merge cards in this addictive 2048 solitaire puzzle to train your brain.">
+<meta name="twitter:image" content="https://solitaire2048.com/assets/twitter-preview.jpg">
+
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["VideoGame", "WebApplication"],
+  "name": "Solitaire 2048",
+  "description": "Play Solitaire 2048 free online — no download needed! Merge cards in this addictive 2048 solitaire puzzle to train your brain.",
+  "url": "https://solitaire2048.com/",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "All",
+  "genre": ["Puzzle", "Card", "Brain Training", "Casual"],
+  "gamePlatform": ["Web Browser", "Mobile Browser", "Desktop Browser"],
+  "featureList": "Free, Online, No Download, Responsive, Single Player, Instant Play, HTML5",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "1250",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Solitaire2048",
+    "url": "https://solitaire2048.com/"
+  }
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+html, body { height: 100%; overflow: hidden; background: #f4f6f9; font-family: 'Inter', sans-serif; color: #1e293b; user-select: none; }
+.font-display { font-family: 'Space Grotesk', sans-serif; }
+
+/* ─── Game Wrapper: Perfect 100vh Layout ─── */
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Ad Units ─── */
+.ad-unit {
+  background: #e8ecf1;
+  border: 1.5px dashed #c8d0db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.7rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* Leaderboard / Banner ads */
+.ad-banner {
+  width: 728px;
+  height: 90px;
+  min-width: 728px;
+  min-height: 90px;
+  max-width: 728px;
+  max-height: 90px;
+}
+
+/* Skyscraper ads */
+.ad-skyscraper {
+  width: 160px;
+  height: 600px;
+  min-width: 160px;
+  min-height: 600px;
+  max-width: 160px;
+  max-height: 600px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Mobile banner fallback */
+@media (max-width: 768px) {
+  .ad-banner {
+    width: 320px;
+    height: 50px;
+    min-width: 320px;
+    min-height: 50px;
+    max-width: 320px;
+    max-height: 50px;
+  }
+}
+
+/* ─── Top Ad Section: Double on Desktop, Single on Mobile ─── */
+.ad-top-section {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: #f4f6f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Show second banner only on wide screens */
+.ad-top-section .ad-banner:nth-child(2) {
+  display: none;
+}
+@media (min-width: 1536px) {
+  .ad-top-section .ad-banner:nth-child(2) {
+    display: flex;
+  }
+}
+
+/* ─── Difficulty Bar ─── */
+.difficulty-bar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.difficulty-btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.difficulty-btn:hover {
+  border-color: #cbd5e1;
+  color: #64748b;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.difficulty-btn.active {
+  border-color: var(--btn-color);
+  color: #ffffff;
+  background: var(--btn-color);
+  box-shadow: 0 2px 12px var(--btn-glow);
+}
+.diff-easy { --btn-color: #10b981; --btn-glow: rgba(16, 185, 129, 0.25); }
+.diff-medium { --btn-color: #3b82f6; --btn-glow: rgba(59, 130, 246, 0.25); }
+.diff-hard { --btn-color: #f59e0b; --btn-glow: rgba(245, 158, 11, 0.25); }
+.diff-extreme { --btn-color: #ef4444; --btn-glow: rgba(239, 68, 68, 0.25); }
+
+/* ─── Game Header ─── */
+.game-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.score-box { text-align: right; }
+.score-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #94a3b8;
+}
+.score-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+.score-current { color: #3b82f6; }
+.score-best { color: #8b5cf6; }
+
+.mute-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.mute-btn:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.mute-btn.muted { color: #cbd5e1; }
+
+.progression-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background: #f1f5f9;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 20px;
+}
+.progression-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+.progression-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #f59e0b;
+}
+
+/* ─── Main Game Area with Side Banners ─── */
+.game-main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Side skyscraper containers - positioned absolutely to not affect centering */
+.side-ad {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  z-index: 10;
+  pointer-events: auto;
+}
+.side-ad-left { left: 12px; }
+.side-ad-right { right: 12px; }
+
+/* Show side ads on large screens */
+@media (min-width: 1200px) {
+  .side-ad { display: flex; align-items: center; justify-content: center; }
+}
+@media (min-width: 1400px) {
+  .side-ad-left { left: 20px; }
+  .side-ad-right { right: 20px; }
+}
+@media (min-width: 1600px) {
+  .side-ad-left { left: 32px; }
+  .side-ad-right { right: 32px; }
+}
+@media (min-width: 1920px) {
+  .side-ad-left { left: 48px; }
+  .side-ad-right { right: 48px; }
+}
+
+/* Game board - always perfectly centered */
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  max-width: 800px;
+  min-height: 0;
+  padding: 8px 16px;
+  gap: 6px;
+}
+
+/* ─── Columns Area ─── */
+.columns-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 0;
+}
+
+.columns-container {
+  display: flex;
+  align-items: flex-end; /* CRITICAL: aligns columns to bottom */
+  justify-content: center;
+  gap: 10px;
+  transition: gap 0.3s;
+  flex-shrink: 1;
+  height: 100%;
+}
+
+.columns-container.mode-3 { gap: 14px; }
+
+/* ─── Column Wrapper & Counter ─── */
+.column-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end; /* CRITICAL: pushes column to bottom */
+}
+.column-counter {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.column-counter.warning { color: #f59e0b; }
+.column-counter.danger {
+  color: #ef4444;
+  animation: blink 0.6s infinite alternate;
+}
+@keyframes blink { from { opacity: 1; } to { opacity: 0.3; } }
+
+/* ─── Column: Cards stack from BOTTOM going UPWARDS ─── */
+.column {
+  width: 58px;
+  min-height: 220px;
+  max-height: 52vh;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column-reverse; /* CRITICAL: stacks from bottom up */
+  align-items: center;
+  justify-content: flex-start; /* With column-reverse, flex-start is the bottom */
+  padding: 6px 3px;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: border-color 0.3s, width 0.3s, box-shadow 0.2s;
+  flex-shrink: 1;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.column::-webkit-scrollbar { width: 0; background: transparent; }
+.column:hover { border-color: #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.column.drag-over {
+  border-color: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+.column.danger {
+  border-color: #ef4444;
+  animation: danger-pulse 0.6s infinite alternate;
+}
+@keyframes danger-pulse {
+  from { box-shadow: 0 0 10px rgba(239, 68, 68, 0.1); }
+  to { box-shadow: 0 0 25px rgba(239, 68, 68, 0.2); }
+}
+
+/* ─── Cards ─── */
+.card {
+  width: 52px;
+  height: 68px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  position: relative;
+  border: 1.5px solid rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  flex-shrink: 0;
+  transition: transform 0.2s, width 0.3s, height 0.3s;
+}
+.card:active { transform: scale(0.95); }
+
+/* BOTTOM-UP CASCADE: Each new card overlaps the one BELOW it */
+/* Because of column-reverse, the newest card (last in DOM) is visually at the bottom */
+/* Mobile / Default (Small screens like iPhone SE) */
+.column .card + .card {
+  margin-bottom: -40px;
+}
+
+.card-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  z-index: 1;
+}
+.card-suit {
+  font-size: 0.6rem;
+  font-weight: 600;
+  opacity: 0.4;
+  margin-top: 2px;
+  z-index: 1;
+}
+
+/* Card color tiers */
+.card-2  { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e40af; }
+.card-4  { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #065f46; }
+.card-8  { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; }
+.card-16 { background: linear-gradient(135deg, #fed7aa, #fdba74); color: #9a3412; }
+.card-32 { background: linear-gradient(135deg, #fecaca, #fca5a5); color: #991b1b; }
+.card-64 { background: linear-gradient(135deg, #e9d5ff, #d8b4fe); color: #6b21a8; }
+.card-128 { background: linear-gradient(135deg, #bfdbfe, #93c5fd); color: #1e3a8a; box-shadow: 0 0 15px rgba(59,130,246,0.15); }
+.card-256 { background: linear-gradient(135deg, #ddd6fe, #c4b5fd); color: #5b21b6; box-shadow: 0 0 15px rgba(139,92,246,0.15); }
+.card-512 { background: linear-gradient(135deg, #ccfbf1, #99f6e4); color: #115e59; box-shadow: 0 0 20px rgba(20,184,166,0.2); }
+.card-1024 { background: linear-gradient(135deg, #fce7f3, #fbcfe8); color: #9d174d; box-shadow: 0 0 25px rgba(236,72,153,0.2); }
+.card-2048 { background: linear-gradient(135deg, #fef9c3, #fde047); color: #854d0e; box-shadow: 0 0 30px rgba(234,179,8,0.25); animation: pulse-gold 2s infinite; }
+.card-4096 { background: linear-gradient(135deg, #f3f4f6, #e5e7eb, #f3f4f6); color: #374151; border-color: #d1d5db; box-shadow: 0 0 30px rgba(156,163,175,0.2); animation: pulse-platinum 2.5s ease-in-out infinite; }
+.card-8192 { background: linear-gradient(135deg, #ecfeff, #a5f3fc); color: #155e75; border-color: #67e8f9; box-shadow: 0 0 35px rgba(34,211,238,0.25); animation: pulse-diamond 2s ease-in-out infinite; }
+.card-16384 { background: linear-gradient(135deg, #fdf4ff, #f5d0fe, #fdf4ff, #fce7f3); background-size: 300% 300%; color: #86198f; border-color: #e879f9; box-shadow: 0 0 40px rgba(232,121,249,0.2), 0 0 60px rgba(59,130,246,0.1); animation: rainbow-shift 3s ease infinite, pulse-prismatic 2s ease-in-out infinite; }
+
+@keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 30px rgba(234,179,8,0.25); } 50% { box-shadow: 0 0 45px rgba(234,179,8,0.35); } }
+@keyframes pulse-platinum { 0%, 100% { box-shadow: 0 0 30px rgba(156,163,175,0.2); } 50% { box-shadow: 0 0 45px rgba(156,163,175,0.3); } }
+@keyframes pulse-diamond { 0%, 100% { box-shadow: 0 0 35px rgba(34,211,238,0.25); } 50% { box-shadow: 0 0 50px rgba(34,211,238,0.35); } }
+@keyframes rainbow-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes pulse-prismatic { 0%, 100% { box-shadow: 0 0 40px rgba(232,121,249,0.2), 0 0 60px rgba(59,130,246,0.1); } 50% { box-shadow: 0 0 55px rgba(232,121,249,0.3), 0 0 75px rgba(59,130,246,0.15); } }
+@keyframes card-enter { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+.card-enter { animation: card-enter 0.3s ease-out; }
+
+/* ─── Hand / Control Panel ─── */
+.hand-panel {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 24px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.hand-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #94a3b8;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.next-dim { opacity: 0.35; transform: scale(0.85); filter: brightness(0.7); }
+.btn-discard {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #fef2f2;
+  border: 2px solid #ef4444;
+  color: #ef4444;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-discard:hover {
+  background: #fee2e2;
+  box-shadow: 0 4px 12px rgba(239,68,68,0.15);
+  transform: translateY(-1px);
+}
+.btn-discard:disabled {
+  opacity: 0.3;
+  border-color: #e2e8f0;
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* Danger banner */
+.danger-banner {
+  color: #ef4444;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.3s;
+  flex-shrink: 0;
+  text-align: center;
+  min-height: 18px;
+}
+.danger-banner.show { opacity: 1; }
+
+/* ─── Bottom Ad Section: Double on Desktop, Single on Mobile ─── */
+.ad-bottom-section {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: #f4f6f9;
+  border-top: 1px solid #e2e8f0;
+}
+
+.ad-bottom-section .ad-banner:nth-child(2) {
+  display: none;
+}
+@media (min-width: 1536px) {
+  .ad-bottom-section .ad-banner:nth-child(2) {
+    display: flex;
+  }
+}
+
+/* ─── Game Over Modal ─── */
+#game-over-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#game-over-modal.hidden { display: none !important; }
+.modal-content {
+  background: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 40px 32px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+.modal-content h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ef4444;
+  margin-bottom: 8px;
+}
+.modal-difficulty-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.modal-content p { color: #64748b; font-size: 1rem; margin-bottom: 12px; }
+.final-score-display {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin-bottom: 24px;
+}
+.modal-buttons { display: flex; flex-direction: column; gap: 12px; }
+#revive-btn {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 2px solid #f59e0b;
+  color: #92400e;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+#revive-btn:hover { box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25); transform: translateY(-1px); }
+#revive-btn:disabled { background: #f1f5f9; border-color: #e2e8f0; color: #cbd5e1; cursor: not-allowed; transform: none; box-shadow: none; }
+#restart-btn {
+  background: #3b82f6;
+  border: none;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+#restart-btn:hover { background: #2563eb; box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3); transform: translateY(-1px); }
+#revive-countdown-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.98);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+}
+#revive-countdown-overlay.hidden { display: none !important; }
+.countdown-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3b82f6;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Particles ─── */
+.particles { position: fixed; inset: 0; pointer-events: none; z-index: 300; }
+.particle { position: absolute; width: 4px; height: 4px; border-radius: 50%; animation: particle-fly 0.6s ease-out forwards; }
+@keyframes particle-fly {
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
+/* ─── Responsive: Desktop Large ─── */
+@media (min-width: 1400px) {
+  .column { width: 68px; min-height: 240px; max-height: 54vh; }
+  .card { width: 60px; height: 80px; }
+  .card-value { font-size: 1.05rem; }
+  .columns-container { gap: 12px; }
+  .mode-3 .column { width: 78px; }
+  .mode-3 .card { width: 68px; height: 90px; }
+  .mode-3 .card-value { font-size: 1.15rem; }
+  /* Standard Desktop: larger negative margin for bigger cards */
+  .column .card + .card {
+    margin-bottom: -70px;
+  }
+}
+@media (min-width: 1600px) {
+  .column { width: 74px; min-height: 250px; max-height: 56vh; }
+  .card { width: 66px; height: 88px; }
+  .card-value { font-size: 1.1rem; }
+  .columns-container { gap: 14px; }
+  .mode-3 .column { width: 86px; }
+  .mode-3 .card { width: 74px; height: 100px; }
+  .mode-3 .card-value { font-size: 1.2rem; }
+  /* Larger Desktop: scaled negative margin */
+  .column .card + .card {
+    margin-bottom: -76px;
+  }
+}
+@media (min-width: 1920px) {
+  .column { width: 80px; min-height: 260px; max-height: 58vh; }
+  .card { width: 70px; height: 94px; }
+  .card-value { font-size: 1.15rem; }
+  .columns-container { gap: 16px; }
+  .mode-3 .column { width: 92px; }
+  .mode-3 .card { width: 80px; height: 108px; }
+  .mode-3 .card-value { font-size: 1.25rem; }
+  /* Largest Desktop: maximum negative margin */
+  .column .card + .card {
+    margin-bottom: -82px;
+  }
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 640px) {
+  .column { width: 52px; min-height: 180px; max-height: 42vh; }
+  .mode-3 .column { width: 58px; min-height: 180px; max-height: 42vh; }
+  .card { width: 44px; height: 58px; }
+  .mode-3 .card { width: 50px; height: 66px; }
+  .card-value { font-size: 0.8rem; }
+  .mode-3 .card-value { font-size: 0.9rem; }
+  .modal-content { padding: 30px 20px; }
+  .modal-content h2 { font-size: 1.5rem; }
+  .final-score-display { font-size: 2rem; }
+  .difficulty-btn { padding: 5px 10px; font-size: 0.6rem; }
+  .progression-bar { padding: 3px 8px; }
+  .hand-panel { padding: 8px 16px; gap: 12px; }
+  .game-header { padding: 8px 12px; }
+  .score-value { font-size: 1.1rem; }
+}
+
+/* ─── Responsive: Tablet (hide side ads) ─── */
+@media (max-width: 1199px) {
+  .side-ad { display: none !important; }
+}
+
+/* ─── Shake animation for full column ─── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+</style>
+</head>
+<body>
+
+<div class="game-wrapper">
+
+  <!-- DOUBLE TOP ADS -->
+  <div class="ad-top-section">
+    <div class="ad-unit ad-banner"><span>728×90 Leaderboard</span></div>
+    <div class="ad-unit ad-banner"><span>728×90 Leaderboard #2</span></div>
+  </div>
+
+  <!-- DIFFICULTY BAR -->
+  <div class="difficulty-bar" id="difficulty-bar">
+    <button class="difficulty-btn diff-easy" data-diff="easy">Easy</button>
+    <button class="difficulty-btn diff-medium active" data-diff="medium">Medium</button>
+    <button class="difficulty-btn diff-hard" data-diff="hard">Hard</button>
+    <button class="difficulty-btn diff-extreme" data-diff="extreme">Extreme</button>
+  </div>
+
+  <!-- GAME HEADER -->
+  <header class="game-header">
+    <div class="font-display text-xl font-bold" style="color:#1e293b">Solitaire<span style="color:#3b82f6">2048</span></div>
+    <div class="flex items-center gap-3">
+      <div class="progression-bar" id="progression-display">
+        <span class="progression-label">Max:</span>
+        <span class="progression-value" id="max-unlocked-value">16</span>
+      </div>
+      <div class="score-box">
+        <div class="score-label">Score</div>
+        <div id="score-display" class="score-value score-current">0</div>
+      </div>
+      <div class="score-box">
+        <div class="score-label">Best</div>
+        <div id="best-display" class="score-value score-best">0</div>
+      </div>
+      <button id="mute-btn" class="mute-btn" title="Toggle Sound"><span id="mute-icon">🔊</span></button>
+    </div>
+  </header>
+
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+    <!-- LEFT SKYSCRAPER -->
+    <div class="side-ad side-ad-left">
+      <div class="ad-unit ad-skyscraper"><span>160×600 Skyscraper Left</span></div>
+    </div>
+
+    <!-- CENTER GAME BOARD -->
+    <div class="game-board">
+      <div id="danger-banner" class="danger-banner">⚠ ALL COLUMNS FULL</div>
+      
+      <div class="columns-area">
+        <div class="columns-container" id="columns-area"></div>
+      </div>
+      
+      <div class="hand-panel">
+        <div>
+          <div class="hand-label">Current</div>
+          <div id="active-card" class="card card-2" draggable="true">
+            <div class="card-value">2</div>
+            <div class="card-suit">◆</div>
+          </div>
+        </div>
+        <div>
+          <div class="hand-label">Next</div>
+          <div id="next-card" class="card card-4 next-dim">
+            <div class="card-value">4</div>
+            <div class="card-suit">◆</div>
+          </div>
+        </div>
+        <div class="ml-auto">
+          <div class="hand-label">Discard</div>
+          <button id="discard-btn" class="btn-discard"><span id="discards-count">2</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SKYSCRAPER -->
+    <div class="side-ad side-ad-right">
+      <div class="ad-unit ad-skyscraper"><span>160×600 Skyscraper Right</span></div>
+    </div>
+  </main>
+
+  <!-- DOUBLE BOTTOM ADS -->
+  <div class="ad-bottom-section">
+    <div class="ad-unit ad-banner"><span>728×90 Banner</span></div>
+    <div class="ad-unit ad-banner"><span>728×90 Banner #2</span></div>
+  </div>
+
+</div>
+
+<!-- GAME OVER MODAL -->
+<div id="game-over-modal" class="hidden">
+  <div class="modal-content">
+    <div id="revive-countdown-overlay" class="hidden">
+      <div class="countdown-circle" id="countdown-number">5</div>
+      <p style="color:#94a3b8; font-size:0.9rem;">Watching ad to revive...</p>
+    </div>
+    <div id="modal-main-content">
+      <h2>Game Over!</h2>
+      <div class="modal-difficulty-label" id="modal-diff-label">MEDIUM</div>
+      <p>Your final score:</p>
+      <div id="final-score" class="final-score-display">0</div>
+      <div class="modal-buttons">
+        <button id="revive-btn">Revive (Watch Ad)</button>
+        <button id="restart-btn">Restart Game</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTICLES -->
+<div class="particles" id="particles"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  const Audio = {
+    ctx: null, on: true,
+    init() { try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); const g = this.ctx.createGain(); g.gain.value = 0.25; g.connect(this.ctx.destination); this.master = g; } catch(e) { this.on = false; } },
+    resume() { if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume(); },
+    beep(freq, dur, type) { if (!this.on || !this.ctx) return; this.resume(); const o = this.ctx.createOscillator(), g = this.ctx.createGain(); o.type = type || 'sine'; o.frequency.setValueAtTime(freq, this.ctx.currentTime); g.gain.setValueAtTime(0.3, this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur); o.connect(g); g.connect(this.master); o.start(); o.stop(this.ctx.currentTime + dur); },
+    drop() { this.beep(500, 0.1); }, merge(v) { this.beep(300 * Math.log2(v), 0.2, 'triangle'); }, unlock() { this.beep(880, 0.3, 'sine'); }, gameover() { [400, 350, 300].forEach((f, i) => setTimeout(() => this.beep(f, 0.3, 'sawtooth'), i * 150)); }, revive() { this.beep(600, 0.4); }
+  };
+
+  const DIFFICULTY = { easy: { columns: 4, maxCards: 8, label: 'EASY', color: '#10b981' }, medium: { columns: 3, maxCards: 8, label: 'MEDIUM', color: '#3b82f6' }, hard: { columns: 3, maxCards: 6, label: 'HARD', color: '#f59e0b' }, extreme: { columns: 3, maxCards: 4, label: 'EXTREME', color: '#ef4444' } };
+
+  const Store = {
+    getBest(diff) { try { return parseInt(localStorage.getItem(`solitaire2048_hs_${diff}`)) || 0; } catch(e) { return 0; } },
+    setBest(diff, v) { try { localStorage.setItem(`solitaire2048_hs_${diff}`, v.toString()); } catch(e) {} },
+    getMute() { try { return localStorage.getItem('solitaire2048_mute') === 'true'; } catch(e) { return false; } },
+    setMute(v) { try { localStorage.setItem('solitaire2048_mute', v.toString()); } catch(e) {} }
+  };
+
+  const State = { columns: [], active: 2, next: 4, score: 0, best: 0, discards: 2, over: false, hasRevived: false, bestMerge: 2, maxUnlocked: 16, currentDiff: 'medium' };
+  const ALL_VALUES = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384];
+  const SUITS = ['◆', '♠', '♥', '♣'];
+
+  const DOM = {
+    columnsArea: document.getElementById('columns-area'), activeCard: document.getElementById('active-card'), nextCard: document.getElementById('next-card'),
+    score: document.getElementById('score-display'), best: document.getElementById('best-display'), discards: document.getElementById('discards-count'),
+    discardBtn: document.getElementById('discard-btn'), danger: document.getElementById('danger-banner'), particles: document.getElementById('particles'),
+    maxUnlockedDisplay: document.getElementById('max-unlocked-value'), diffBar: document.getElementById('difficulty-bar'),
+    modalDiffLabel: document.getElementById('modal-diff-label'), gameOverModal: document.getElementById('game-over-modal'),
+    finalScore: document.getElementById('final-score'), reviveBtn: document.getElementById('revive-btn'), restartBtn: document.getElementById('restart-btn'),
+    reviveOverlay: document.getElementById('revive-countdown-overlay'), countdownNum: document.getElementById('countdown-number'),
+    modalMain: document.getElementById('modal-main-content'), muteBtn: document.getElementById('mute-btn'), muteIcon: document.getElementById('mute-icon')
+  };
+
+  function updateMuteUI() { if (Audio.on) { DOM.muteIcon.textContent = '🔊'; DOM.muteBtn.classList.remove('muted'); DOM.muteBtn.title = 'Mute Sound'; } else { DOM.muteIcon.textContent = '🔇'; DOM.muteBtn.classList.add('muted'); DOM.muteBtn.title = 'Unmute Sound'; } }
+  function toggleMute() { Audio.on = !Audio.on; Store.setMute(!Audio.on); updateMuteUI(); if (Audio.on && Audio.ctx && Audio.ctx.state === 'suspended') Audio.ctx.resume(); }
+
+  function getSpawnWeights() { const available = ALL_VALUES.filter(v => v <= State.maxUnlocked); const weights = {}; for (const v of available) { if (v === 2) weights[v] = 0.45; else if (v === 4) weights[v] = 0.30; else if (v === 8) weights[v] = 0.12; else if (v === 16) weights[v] = 0.06; else { const idx = ALL_VALUES.indexOf(v); weights[v] = Math.max(0.0005, 0.08 / Math.pow(2, idx - 3)); } } const total = Object.values(weights).reduce((a, b) => a + b, 0); for (const k in weights) weights[k] /= total; return weights; }
+  function randVal() { const weights = getSpawnWeights(); const entries = Object.entries(weights); let r = Math.random(); for (const [val, w] of entries) { r -= w; if (r <= 0) return parseInt(val); } return 2; }
+
+  function checkUnlock(mergedValue) { if (mergedValue > State.maxUnlocked) { State.maxUnlocked = mergedValue; DOM.maxUnlockedDisplay.textContent = State.maxUnlocked; DOM.maxUnlockedDisplay.style.color = getTierColor(mergedValue); Audio.unlock(); return true; } return false; }
+  function getTierColor(value) { if (value >= 16384) return '#86198f'; if (value >= 8192) return '#155e75'; if (value >= 4096) return '#374151'; if (value >= 2048) return '#854d0e'; if (value >= 1024) return '#9d174d'; if (value >= 512) return '#115e59'; return '#f59e0b'; }
+
+  function setDifficulty(diffKey) { if (State.over === false && State.score > 0) { if (!confirm('Changing difficulty will restart your current game. Continue?')) return; } State.currentDiff = diffKey; const cfg = DIFFICULTY[diffKey]; DOM.diffBar.querySelectorAll('.difficulty-btn').forEach(btn => { btn.classList.toggle('active', btn.dataset.diff === diffKey); }); DOM.columnsArea.classList.toggle('mode-3', cfg.columns === 3); State.best = Store.getBest(diffKey); DOM.best.textContent = State.best.toLocaleString(); resetGame(); }
+
+  function renderColumns() {
+    DOM.columnsArea.innerHTML = ''; const cfg = DIFFICULTY[State.currentDiff];
+    State.columns.forEach((col, idx) => {
+      const wrap = document.createElement('div'); wrap.className = 'column-wrapper';
+      const counter = document.createElement('div'); counter.className = 'column-counter'; counter.textContent = `${col.length} / ${cfg.maxCards}`; if (col.length >= cfg.maxCards - 2) counter.classList.add('warning'); if (col.length >= cfg.maxCards - 1) counter.classList.add('danger'); wrap.appendChild(counter);
+      const column = document.createElement('div'); column.className = 'column'; if (col.length >= cfg.maxCards - 1) column.classList.add('danger'); column.dataset.index = idx;
+      column.addEventListener('click', (e) => { if (State.over) return; placeCard(idx); });
+      column.addEventListener('dragover', (e) => { e.preventDefault(); if (!State.over) column.classList.add('drag-over'); });
+      column.addEventListener('dragleave', () => column.classList.remove('drag-over'));
+      column.addEventListener('drop', (e) => { e.preventDefault(); column.classList.remove('drag-over'); if (!State.over) placeCard(idx); });
+      // Render in reverse order: last element (newest) is visually at the bottom
+      // Because of column-reverse, we iterate normally - last element in array is last in DOM, which appears at bottom
+      col.forEach((c, i) => { 
+        const card = document.createElement('div'); 
+        card.className = `card card-${c.value}`; 
+        if (i === col.length - 1 && c.isNew) { 
+          card.classList.add('card-enter'); 
+          c.isNew = false; 
+        } 
+        card.style.zIndex = i; 
+        card.style.transform = `rotate(${(Math.random()-0.5)*3}deg)`; 
+        card.innerHTML = `<div class="card-value">${c.value}</div><div class="card-suit">${SUITS[Math.floor(Math.random()*SUITS.length)]}</div>`; 
+        column.appendChild(card); 
+      });
+      wrap.appendChild(column); DOM.columnsArea.appendChild(wrap);
+    });
+    const cfg2 = DIFFICULTY[State.currentDiff]; const allNearFull = State.columns.every(c => c.length >= cfg2.maxCards - 1); DOM.danger.classList.toggle('show', allNearFull);
+  }
+  function renderHand() { DOM.activeCard.className = `card card-${State.active}`; DOM.activeCard.innerHTML = `<div class="card-value">${State.active}</div><div class="card-suit">${SUITS[0]}</div>`; DOM.nextCard.className = `card card-${State.next} next-dim`; DOM.nextCard.innerHTML = `<div class="card-value">${State.next}</div><div class="card-suit">${SUITS[0]}</div>`; DOM.score.textContent = State.score.toLocaleString(); DOM.discards.textContent = State.discards; DOM.discardBtn.disabled = State.discards <= 0 || State.over; }
+
+  function placeCard(idx) { 
+    if (State.over) return; 
+    const cfg = DIFFICULTY[State.currentDiff]; 
+    const col = State.columns[idx]; 
+    if (col.length >= cfg.maxCards) { 
+      const cols = DOM.columnsArea.querySelectorAll('.column'); 
+      cols[idx].style.animation = 'shake 0.3s'; 
+      setTimeout(() => cols[idx].style.animation = '', 300); 
+      return; 
+    } 
+    Audio.drop(); 
+    // Push to end of array - with column-reverse, this appears at the bottom
+    col.push({ value: State.active, id: Date.now() + Math.random(), isNew: true }); 
+    let merges = 0; 
+    // Merge from the bottom (end of array) upward
+    while (col.length >= 2) { 
+      const bottom = col[col.length-1], above = col[col.length-2]; 
+      if (bottom.value === above.value) { 
+        const merged = bottom.value * 2; 
+        col.pop(); 
+        col.pop(); 
+        col.push({ value: merged, id: Date.now(), isNew: true }); 
+        merges++; 
+        const mult = merges > 1 ? merges : 1; 
+        State.score += merged * mult; 
+        if (merged > State.bestMerge) State.bestMerge = merged; 
+        checkUnlock(merged); 
+        Audio.merge(merged); 
+        spawnParticles(idx, merged); 
+      } else break; 
+    } 
+    State.active = State.next; 
+    State.next = randVal(); 
+    if (State.score > State.best) { 
+      State.best = State.score; 
+      Store.setBest(State.currentDiff, State.best); 
+      DOM.best.textContent = State.best.toLocaleString(); 
+    } 
+    renderColumns(); 
+    renderHand(); 
+    checkGameOver(); 
+  }
+
+  function checkGameOver() { const cfg = DIFFICULTY[State.currentDiff]; let fullColumns = 0; for (const col of State.columns) { if (col.length >= cfg.maxCards) fullColumns++; } if (fullColumns === State.columns.length) triggerGameOver(); }
+  function triggerGameOver() { if (State.over) return; State.over = true; Audio.gameover(); const cfg = DIFFICULTY[State.currentDiff]; DOM.finalScore.textContent = State.score.toLocaleString(); DOM.modalDiffLabel.textContent = cfg.label; DOM.modalDiffLabel.style.color = cfg.color; if (State.hasRevived) { DOM.reviveBtn.disabled = true; DOM.reviveBtn.textContent = 'Revive Used'; } else { DOM.reviveBtn.disabled = false; DOM.reviveBtn.textContent = 'Revive (Watch Ad)'; } DOM.gameOverModal.classList.remove('hidden'); DOM.reviveOverlay.classList.add('hidden'); DOM.modalMain.style.display = ''; }
+
+  function startRevive() { State.hasRevived = true; DOM.modalMain.style.display = 'none'; DOM.reviveOverlay.classList.remove('hidden'); let sec = 5; DOM.countdownNum.textContent = sec; const timer = setInterval(() => { sec--; DOM.countdownNum.textContent = sec; if (sec <= 0) { clearInterval(timer); executeRevive(); } }, 1000); }
+  function executeRevive() { State.over = false; DOM.gameOverModal.classList.add('hidden'); State.columns.forEach(col => { for (let i = 0; i < 3; i++) { if (col.length > 0) col.pop(); } }); Audio.revive(); renderColumns(); renderHand(); }
+
+  function resetGame() { DOM.gameOverModal.classList.add('hidden'); const cfg = DIFFICULTY[State.currentDiff]; State.columns = Array(cfg.columns).fill(null).map(() => []); State.score = 0; State.discards = 2; State.over = false; State.hasRevived = false; State.bestMerge = 2; State.maxUnlocked = 16; DOM.reviveBtn.disabled = false; DOM.reviveBtn.textContent = 'Revive (Watch Ad)'; DOM.maxUnlockedDisplay.textContent = '16'; DOM.maxUnlockedDisplay.style.color = '#f59e0b'; for (let i = 0; i < cfg.columns; i++) { State.columns[i].push({ value: randVal(), id: Date.now() + Math.random() }); } State.active = randVal(); State.next = randVal(); renderColumns(); renderHand(); }
+
+  function discard() { if (State.over || State.discards <= 0) return; State.discards--; State.active = State.next; State.next = randVal(); renderHand(); }
+
+  function spawnParticles(colIdx, val) { const cols = DOM.columnsArea.querySelectorAll('.column'); const rect = cols[colIdx].getBoundingClientRect(); const cx = rect.left + rect.width/2, cy = rect.bottom - 40; const colors = { 4:'#3b82f6', 8:'#10b981', 16:'#f59e0b', 32:'#ef4444', 64:'#8b5cf6', 128:'#3b82f6', 256:'#8b5cf6', 512:'#14b8a6', 1024:'#ec4899', 2048:'#eab308', 4096:'#9ca3af', 8192:'#22d3ee', 16384:'#e879f9' }; const color = colors[val] || '#3b82f6'; for (let i = 0; i < 12; i++) { const p = document.createElement('div'); p.className = 'particle'; p.style.background = color; p.style.boxShadow = `0 0 4px ${color}`; p.style.left = cx + 'px'; p.style.top = cy + 'px'; const a = (Math.PI*2*i)/12, d = 30 + Math.random()*60; p.style.setProperty('--tx', Math.cos(a)*d + 'px'); p.style.setProperty('--ty', Math.sin(a)*d + 'px'); DOM.particles.appendChild(p); setTimeout(() => p.remove(), 600); } }
+
+  function setupInput() {
+    DOM.diffBar.querySelectorAll('.difficulty-btn').forEach(btn => { btn.addEventListener('click', () => setDifficulty(btn.dataset.diff)); });
+    DOM.muteBtn.addEventListener('click', toggleMute);
+    DOM.activeCard.addEventListener('dragstart', (e) => { if (State.over) { e.preventDefault(); return; } e.dataTransfer.effectAllowed = 'move'; DOM.activeCard.style.opacity = '0.4'; });
+    DOM.activeCard.addEventListener('dragend', () => { DOM.activeCard.style.opacity = ''; document.querySelectorAll('.column').forEach(c => c.classList.remove('drag-over')); });
+    let clone = null;
+    DOM.activeCard.addEventListener('touchstart', (e) => { if (State.over) return; const t = e.touches[0]; clone = DOM.activeCard.cloneNode(true); clone.style.cssText = 'position:fixed;z-index:1000;pointer-events:none;opacity:0.85;transform:scale(1.05);'; document.body.appendChild(clone); moveClone(t); }, {passive:false});
+    DOM.activeCard.addEventListener('touchmove', (e) => { if (!clone) return; e.preventDefault(); moveClone(e.touches[0]); const el = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY); const col = el?.closest('.column'); document.querySelectorAll('.column').forEach(c => c.classList.remove('drag-over')); if (col) col.classList.add('drag-over'); }, {passive:false});
+    DOM.activeCard.addEventListener('touchend', (e) => { if (!clone) return; const t = e.changedTouches[0]; const el = document.elementFromPoint(t.clientX, t.clientY); const col = el?.closest('.column'); if (col && !State.over) placeCard(parseInt(col.dataset.index)); clone.remove(); clone = null; document.querySelectorAll('.column').forEach(c => c.classList.remove('drag-over')); });
+    function moveClone(t) { if (clone) { clone.style.left = (t.clientX - 26) + 'px'; clone.style.top = (t.clientY - 34) + 'px'; } }
+    DOM.discardBtn.addEventListener('click', discard); DOM.restartBtn.addEventListener('click', resetGame); DOM.reviveBtn.addEventListener('click', startRevive);
+    document.addEventListener('keydown', (e) => { if (State.over) { if (e.key === 'Enter' || e.key === ' ') resetGame(); return; } const cfg = DIFFICULTY[State.currentDiff]; const maxCol = Math.min(parseInt(e.key), cfg.columns); if (e.key >= '1' && e.key <= '4' && maxCol > 0) placeCard(maxCol - 1); if (e.key === 'd' || e.key === 'D') discard(); });
+    const wake = () => { Audio.resume(); document.removeEventListener('click', wake); document.removeEventListener('touchstart', wake); };
+    document.addEventListener('click', wake); document.addEventListener('touchstart', wake);
+  }
+
+  function init() { Audio.init(); const isMuted = Store.getMute(); if (isMuted) Audio.on = false; updateMuteUI(); const cfg = DIFFICULTY[State.currentDiff]; State.best = Store.getBest(State.currentDiff); DOM.best.textContent = State.best.toLocaleString(); DOM.columnsArea.classList.toggle('mode-3', cfg.columns === 3); setupInput(); resetGame(); console.log('Solitaire2048 initialized'); }
+  init();
+})();
+</script>
+
+</body>
+</html>
